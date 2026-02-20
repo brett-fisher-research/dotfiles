@@ -1,22 +1,7 @@
 # Dotfiles bare git repo
 alias dotfiles='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
-# cfg: dotfiles shorthand
-cfg() {
-  case "$1" in
-    update)
-      git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME add -u
-      git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME commit -m "${2:-update dotfiles}"
-      git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME push
-      ;;
-    pull)
-      git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME pull
-      ;;
-    *)
-      git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME "$@"
-      ;;
-  esac
-}
+alias cfg='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH

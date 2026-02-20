@@ -55,11 +55,13 @@ bash <(curl -s https://raw.githubusercontent.com/YOUR_GITHUB_USERNAME/dotfiles/m
 
 ## Daily Usage
 
-| Command | Description |
-|---|---|
-| `cfg update "message"` | Stage all tracked files, commit, and push |
-| `cfg pull` | Pull latest changes from remote |
-| `cfg status` | Show status of tracked files |
-| `dotfiles add ~/newfile` | Start tracking a new file |
+`cfg` is an alias for `git` pointed at the bare repo, so all git commands work:
 
-> `cfg` is a shell function defined in `.zshrc`. Any arguments other than `update` and `pull` are passed directly to git, so `cfg log`, `cfg diff`, etc. all work too.
+```bash
+cfg status
+cfg add ~/.zshrc
+cfg commit -m "Update zshrc"
+cfg push
+cfg pull
+cfg log
+```
