@@ -1,6 +1,4 @@
 # Dotfiles bare git repo
-alias dotfiles='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
-
 alias cfg='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
 # If you come from bash you might have to change your $PATH.

@@ -30,7 +30,7 @@ bash <(curl -s https://raw.githubusercontent.com/YOUR_GITHUB_USERNAME/dotfiles/m
 
 2. Define the alias temporarily:
    ```bash
-   alias dotfiles='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+   alias cfg='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
    ```
 
 3. Check for conflicting files. If `.zshrc` or `.tmux.conf` already exist, **delete or back them up first**:
@@ -40,12 +40,12 @@ bash <(curl -s https://raw.githubusercontent.com/YOUR_GITHUB_USERNAME/dotfiles/m
 
 4. Check out the files:
    ```bash
-   dotfiles checkout
+   cfg checkout
    ```
 
 5. Hide untracked files from status output:
    ```bash
-   dotfiles config --local status.showUntrackedFiles no
+   cfg config --local status.showUntrackedFiles no
    ```
 
 6. Reload your shell:
