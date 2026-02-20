@@ -12,20 +12,14 @@ Personal dotfiles for zsh and tmux, managed with a [bare git repository](https:/
 ### Automated (recommended)
 
 ```bash
-bash <(curl -s https://raw.githubusercontent.com/YOUR_GITHUB_USERNAME/dotfiles/main/dotfiles-setup.sh)
-```
-
-Or with a custom repo URL:
-
-```bash
-bash <(curl -s https://raw.githubusercontent.com/YOUR_GITHUB_USERNAME/dotfiles/main/dotfiles-setup.sh) git@github.com:YOUR_GITHUB_USERNAME/dotfiles.git
+curl -s https://raw.githubusercontent.com/brett-fisher-research/dotfiles/main/dotfiles-setup.sh | bash
 ```
 
 ### Manual
 
 1. Clone the bare repo:
    ```bash
-   git clone --bare git@github.com:YOUR_GITHUB_USERNAME/dotfiles.git $HOME/.dotfiles
+   git clone --bare git@github.com:brett-fisher-research/dotfiles.git $HOME/.dotfiles
    ```
 
 2. Define the alias temporarily:

@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-REPO_URL="${1:-git@github.com:YOUR_GITHUB_USERNAME/dotfiles.git}"
+REPO_URL="${1:-git@github.com:brett-fisher-research/dotfiles.git}"
 DOTFILES_DIR="$HOME/.dotfiles"
 TRACKED_FILES=(".zshrc" ".tmux.conf")
 
