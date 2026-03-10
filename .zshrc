@@ -1,3 +1,6 @@
+# Linuxbrew
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
 # Dotfiles bare git repo
 alias cfg='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
@@ -175,6 +178,41 @@ alias c="clear"
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+
+# --- Dependency bootstrap (idempotent) ---
+
+if ! command -v zoxide &>/dev/null; then
+  echo "[bootstrap] Installing zoxide..."
+  curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
+fi
+
+if ! command -v fzf &>/dev/null; then
+  echo "[bootstrap] Installing fzf..."
+  if command -v apt-get &>/dev/null; then
+    sudo apt-get update && sudo apt-get install -y fzf
+  elif command -v brew &>/dev/null; then
+    brew install fzf
+  else
+    git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && ~/.fzf/install --all
+  fi
+fi
+
+# Initialize zoxide (smart cd replacement)
+if command -v zoxide &>/dev/null; then
+  eval "$(zoxide init zsh)"
+fi
+
+# Initialize fzf key bindings and completion
+if command -v fzf &>/dev/null; then
+  if fzf --zsh &>/dev/null 2>&1; then
+    source <(fzf --zsh)
+  elif [[ -f /usr/share/doc/fzf/examples/key-bindings.zsh ]]; then
+    source /usr/share/doc/fzf/examples/key-bindings.zsh
+    [[ -f /usr/share/doc/fzf/examples/completion.zsh ]] && source /usr/share/doc/fzf/examples/completion.zsh
+  elif [[ -f ~/.fzf.zsh ]]; then
+    source ~/.fzf.zsh
+  fi
+fi
 
 wt() {
   local worktree_dir="$HOME/.worktrees"
