@@ -6,6 +6,7 @@ Personal dotfiles for zsh and tmux, managed with a [bare git repository](https:/
 
 - `~/.zshrc` — Zsh configuration
 - `~/.tmux.conf` — Tmux configuration
+- `~/CLAUDE.md` — Claude Code instructions for this repo
 
 ## Setup on a New Machine
 
@@ -27,9 +28,9 @@ curl -s https://raw.githubusercontent.com/brett-fisher-research/dotfiles/main/do
    alias cfg='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
    ```
 
-3. Check for conflicting files. If `.zshrc` or `.tmux.conf` already exist, **delete or back them up first**:
+3. Check for conflicting files. If any tracked files already exist, **delete or back them up first**:
    ```bash
-   rm ~/.zshrc ~/.tmux.conf
+   rm ~/.zshrc ~/.tmux.conf ~/CLAUDE.md
    ```
 
 4. Check out the files:
@@ -46,6 +47,15 @@ curl -s https://raw.githubusercontent.com/brett-fisher-research/dotfiles/main/do
    ```bash
    source ~/.zshrc
    ```
+
+## Machine-Specific Overrides
+
+Create `~/.zshrc.local` on any machine for local customizations (not tracked in dotfiles). It is sourced automatically at the end of `.zshrc`. Useful for setting a custom prompt on a remote machine, for example:
+
+```sh
+# ~/.zshrc.local
+PROMPT='%n@%m:%~|⇒ '
+```
 
 ## Daily Usage
 
