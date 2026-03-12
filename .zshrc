@@ -395,3 +395,6 @@ tmux-kill() {
     echo "tmux-kill: session '$session' is gone"
   fi
 }
+
+# Machine-specific overrides (not tracked in dotfiles)
+[[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
