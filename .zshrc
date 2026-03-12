@@ -109,37 +109,6 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-# Auto-attach to tmux on terminal open.
-# Attaches to "main" if it exists and is unoccupied, otherwise tries
-# "main-2", "main-3", etc. Creates the session if none are found.
-if [ -z "$TMUX" ]; then
-  _tmux_attach_main() {
-    local n=1
-    while true; do
-      local name
-      [[ $n -eq 1 ]] && name="main" || name="main-$n"
-
-      if ! tmux has-session -t "=$name" 2>/dev/null; then
-        echo "tmux: creating session '$name'"
-        tmux new-session -s "$name"
-        return
-      fi
-
-      local clients
-      clients=$(tmux list-clients -t "=$name" 2>/dev/null | wc -l)
-      if [[ $clients -eq 0 ]]; then
-        echo "tmux: attaching to '$name'"
-        tmux attach -t "=$name"
-        return
-      fi
-
-      echo "tmux: '$name' is occupied, trying next..."
-      (( n++ ))
-    done
-  }
-  _tmux_attach_main
-  unset -f _tmux_attach_main
-fi
 
 . "$HOME/.local/bin/env"
 
