@@ -1,5 +1,7 @@
+export PATH="$HOME/.local/bin:$PATH"
+
 # Linuxbrew
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+[[ -x /home/linuxbrew/.linuxbrew/bin/brew ]] && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
 # Dotfiles bare git repo
 alias cfg='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
@@ -110,7 +112,7 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 
-. "$HOME/.local/bin/env"
+[[ -f "$HOME/.local/bin/env" ]] && . "$HOME/.local/bin/env"
 
 export NVIM_APPNAME=nvim-dev
 
