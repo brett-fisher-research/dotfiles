@@ -141,6 +141,7 @@ alias gf="git fetch"
 
 # Other aliases
 alias c="clear"
+alias cl="claude"
 
 
 # bun completions
