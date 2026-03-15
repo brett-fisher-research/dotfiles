@@ -3,6 +3,9 @@ export PATH="$HOME/.local/bin:$PATH"
 # Linuxbrew
 [[ -x /home/linuxbrew/.linuxbrew/bin/brew ]] && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
+# libpq (psql client tools)
+export PATH="/home/linuxbrew/.linuxbrew/opt/libpq/bin:$PATH"
+
 # Dotfiles bare git repo
 alias cfg='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
