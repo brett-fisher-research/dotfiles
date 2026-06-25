@@ -201,6 +201,12 @@ wt() {
       fi
       git worktree add -b "$2" "$worktree_dir/$2"
       cd "$worktree_dir/$2"
+
+      # Run project post-create hook if present
+      if [[ -f ".wtconfig" ]]; then
+        echo "Running .wtconfig post_create hook..."
+        source ".wtconfig" post_create
+      fi
       ;;
     remove)
       local branch="" force=0
@@ -401,23 +407,6 @@ tmux-kill() {
     echo "tmux-kill: session '$session' is gone"
   fi
 }
-
-# SSH agent persistence across WSL windows
-# Starts a new agent on first use (or after reboot); reuses it in subsequent shells.
-_ssh_agent_env="$HOME/.ssh/agent.env"
-_start_ssh_agent() {
-  ssh-agent > "$_ssh_agent_env"
-  chmod 600 "$_ssh_agent_env"
-  source "$_ssh_agent_env" > /dev/null
-  ssh-add
-}
-if [[ -f "$_ssh_agent_env" ]]; then
-  source "$_ssh_agent_env" > /dev/null
-  kill -0 "$SSH_AGENT_PID" 2>/dev/null || _start_ssh_agent
-else
-  _start_ssh_agent
-fi
-unset _ssh_agent_env
 
 # Machine-specific overrides (not tracked in dotfiles)
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
