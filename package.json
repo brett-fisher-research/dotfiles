@@ -1,0 +1,13 @@
+{
+  "name": "zshrc-config",
+  "version": "1.0.0",
+  "description": "My zsh configuration with an idempotent setup script",
+  "private": true,
+  "scripts": {
+    "setup": "node setup.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/brett-fisher-research/zshrc-config.git"
+  }
+}

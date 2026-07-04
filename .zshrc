@@ -6,9 +6,6 @@ export PATH="$HOME/.local/bin:$PATH"
 # libpq (psql client tools)
 export PATH="/home/linuxbrew/.linuxbrew/opt/libpq/bin:$PATH"
 
-# Dotfiles bare git repo
-alias cfg='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
-
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 
@@ -115,7 +112,8 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 
-[[ -f "$HOME/.local/bin/env" ]] && . "$HOME/.local/bin/env"
+[ -f "$HOME/.local/bin/env" ] && . "$HOME/.local/bin/env"
+[ -d "$HOME/.local/bin" ] && export PATH="$HOME/.local/bin:$PATH"
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -408,3 +406,5 @@ tmux-kill() {
 
 # Machine-specific overrides (not tracked in dotfiles)
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
+
+eval "$(zoxide init zsh)"

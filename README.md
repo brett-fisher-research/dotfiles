@@ -1,71 +1,38 @@
-# Dotfiles
+# zshrc-config
 
-Personal dotfiles for zsh and tmux, managed with a [bare git repository](https://www.atlassian.com/git/tutorials/dotfiles).
+My [zsh](https://www.zsh.org/) configuration, kept in its own repo so it's easy to set up on any
+machine. Split out of my dotfiles for a clean, per-tool setup.
 
-## Files Tracked
+## What's in the config
 
-- `~/.zshrc` — Zsh configuration
-- `~/.tmux.conf` — Tmux configuration
-- `~/CLAUDE.md` — Claude Code instructions for this repo
+- [Oh My Zsh](https://ohmyz.sh/) (`robbyrussell` theme, `git` plugin)
+- Git aliases (`gs`, `gch`, `gcm`, `gpsh`, ...) and shortcuts (`c`, `cl`)
+- [zoxide](https://github.com/ajeetdsouza/zoxide) smart `cd` and [fzf](https://github.com/junegunn/fzf)
+  key bindings, with an idempotent dependency bootstrap
+- `wt` — a git worktree helper (add / remove / list / merge / home / go) with completions
+- `serve` (quick HTTP server) and `tmux-kill` helpers
+- nvm, bun, and `~/.local/bin` on `PATH`
+- Machine-specific overrides sourced from `~/.zshrc.local` (untracked)
 
-## Setup on a New Machine
+## Setup on a new machine
 
-### Automated (recommended)
+### 1. Install prerequisites
 
-```bash
-curl -s https://raw.githubusercontent.com/brett-fisher-research/dotfiles/main/dotfiles-setup.sh | bash
-```
+- zsh + [Oh My Zsh](https://ohmyz.sh/#install)
+- [Node.js](https://nodejs.org/) — only used to run the setup script
 
-### Manual
-
-1. Clone the bare repo:
-   ```bash
-   git clone --bare git@github.com:brett-fisher-research/dotfiles.git $HOME/.dotfiles
-   ```
-
-2. Define the alias temporarily:
-   ```bash
-   alias cfg='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
-   ```
-
-3. Check for conflicting files. If any tracked files already exist, **delete or back them up first**:
-   ```bash
-   rm ~/.zshrc ~/.tmux.conf ~/CLAUDE.md
-   ```
-
-4. Check out the files:
-   ```bash
-   cfg checkout
-   ```
-
-5. Hide untracked files from status output:
-   ```bash
-   cfg config --local status.showUntrackedFiles no
-   ```
-
-6. Reload your shell:
-   ```bash
-   source ~/.zshrc
-   ```
-
-## Machine-Specific Overrides
-
-Create `~/.zshrc.local` on any machine for local customizations (not tracked in dotfiles). It is sourced automatically at the end of `.zshrc`. Useful for setting a custom prompt on a remote machine, for example:
+### 2. Clone and run setup
 
 ```sh
-# ~/.zshrc.local
-PROMPT='%n@%m:%~|⇒ '
+git clone https://github.com/brett-fisher-research/zshrc-config.git
+cd zshrc-config
+npm run setup
 ```
 
-## Daily Usage
+The setup script is **idempotent** — run it as many times as you like (e.g. after pulling config
+changes). It copies `.zshrc` to `~/.zshrc`. Open a new shell or run `source ~/.zshrc` to apply.
 
-`cfg` is an alias for `git` pointed at the bare repo, so all git commands work:
+## Making changes
 
-```bash
-cfg status
-cfg add ~/.zshrc
-cfg commit -m "Update zshrc"
-cfg push
-cfg pull
-cfg log
-```
+Edit `.zshrc` in this repo, then re-run `npm run setup` to apply it. This keeps the repo as the
+single source of truth instead of editing `~/.zshrc` directly.
